@@ -1,9 +1,12 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { ApolloProvider } from '@apollo/client';
+import { ThemeProvider } from '@mui/material';
 
 import MainLayout from './layouts/main-layout';
 import ErrorPage from './pages/error-page';
+import HomePage from './pages/home-page';
+import { theme } from './style/theme';
 import { client } from './utils/client';
 
 const router = createBrowserRouter([
@@ -13,7 +16,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <div>Home Screen</div>,
+        element: <HomePage />,
       },
       {
         path: '/book',
@@ -26,7 +29,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <ApolloProvider client={client}>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </ApolloProvider>
   );
 }
